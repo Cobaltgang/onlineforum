@@ -1,5 +1,5 @@
 <?php
-namespace IcyApril;
+
 
     /**
      * Class CryptoLib (v0.8 Christmas)
