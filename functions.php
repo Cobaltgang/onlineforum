@@ -6,7 +6,7 @@ class func{
         if(!isset($_SESSION['id']) || !isset($_COOKIE['PHPSESSID'])){
             session_start();
         }
-        else if (isset($_COOKIE['id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])){
+         if (isset($_COOKIE['id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])){
             $query = "SELECT * FROM sessions WHERE session_userid= :userid AND session_token = :token AND session_serial = :serial";
 
             $userid = $_COOKIE['userid'];

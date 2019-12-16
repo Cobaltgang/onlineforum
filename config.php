@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 $dbh = new PDO('mysql:host=localhost;dbname=sap', 'root', 'root');
 
-$stmt = $dbh->prepare("SELECT * FROM users;");
+/*$stmt = $dbh->prepare("SELECT * FROM users;");
 $stmt->execute();
 
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -13,5 +13,5 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($rows as $row)
 {
     echo $row[username];
-}
+}*/
 ?>
