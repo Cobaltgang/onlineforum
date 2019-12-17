@@ -4,8 +4,8 @@
 <div>
    
    <?php
-    if (func::checkLoginState($dbh)){
-        if(!isset($_POST['username']) && isset($_POST['password'])){
+    if (!func::checkLoginState($dbh)){
+        if(isset($_POST['username']) && isset($_POST['password'])){
             $query = "SELECT * FROM users WHERE username = :username AND password = :password";
 
             $username = $_POST['username'];
@@ -14,10 +14,10 @@
             $stmt = $dbh->prepare($query);
             $stmt->execute(array(':username' => $username, ':password' =>$password));
 
-            $row = $stmt-fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if($row['user_id'] > 0){
-                //func::createRecord($row['user_id'], $row['username'])
+            if($row['id'] > 0){
+                func::createRecord($row['user_id'], $row['username']);
                 header("location:index.php");
                echo 'logged in';
               

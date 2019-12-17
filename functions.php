@@ -5,9 +5,11 @@ class func{
     {
         if(!isset($_SESSION['id']) || !isset($_COOKIE['PHPSESSID'])){
             session_start();
+            echo'start session';
         }
-        else if (isset($_COOKIE['id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])){
-            $query = "SELECT * FROM sessions WHERE session_userid= :userid AND session_token = :token AND session_serial = :serial";
+        if (isset($_COOKIE['id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])){
+            echo'1';
+            $query = "SELECT * FROM sessions WHERE session_userid= :userid AND session_token = :token AND session_serial = :serial;";
 
             $userid = $_COOKIE['userid'];
             $token = $_COOKIE['token'];
@@ -24,10 +26,12 @@ class func{
                     $row['session_token']==$_COOKIE['token'] &&
                     $row['session_serial']==$_COOKIE['serial']
                 ){
+                    echo'2';
                     if($row['session_userid'] ==$_SESSION['userid']&&
                     $row['session_token']==$_SESSION['token'] &&
                     $row['session_serial']==$_SESSION['serial']){
                         return true;
+                        echo'log in';
                     }
                 }
 
