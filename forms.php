@@ -6,6 +6,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="style2.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="validation.js"></script>
     <!------ Include the above in your HEAD tag ---------->
 </head>
 
@@ -43,22 +47,31 @@
                             <h3>Register</h3>
                             <form>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="name" placeholder="Username"
+                                    <input type="text" class="form-control" type="text" name="username" id = "txt" onkeyup = "Validate(this)" placeholder="username" required placeholder="Username"
                                         value="" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="email" placeholder="Your Email *"
+                                    <input required type="text" class="form-control" minlength="4" type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id = "email"  onkeyup="emailCheck();" placeholder="Your Email *"
                                         value="" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="password" placeholder="Password"
+                                    <input required name="password" type="password" class="form-control" minlength="8" maxlength="16" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password" onkeyup="strong()" placeholder="Password"
                                         value="" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password *" value="" />
+                                    <input required name="password" type="password" class="form-control inputpass" minlength="8" maxlength="16" placeholder="Enter again to validate"  id="cpassword" onkeyup="checksimilarity();" />
+                                </div>
+                                <div class="form-group" id ="match">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btnSubmit" value="Register" />
+                                    <input type="submit" id="submit" class="btnSubmit" value="Submit"/>
+                                </div>
+                                <div id="match">
+                                    <p id ="1"></p>
+                                    <p id="2"></p>
+                                    <p id="3"></p>
+                                    <p id="4"></p>
+                                    <p id="5"></p>
                                 </div>
                             </form>
                         </div>
@@ -69,26 +82,10 @@
 
     </div>
     <?php
-    if(!empty($_POST["password"]) && ($_POST["password"] == $_POST["cpassword"])) {
-        $password = test_input($_POST["password"]);
-        $cpassword = test_input($_POST["cpassword"]);
-        if (strlen($_POST["password"]) <= '8') {
-            $passwordErr = "Your Password Must Contain At Least 8 Characters!";
-        }
-        elseif(!preg_match("#[0-9]+#",$password)) {
-            $passwordErr = "Your Password Must Contain At Least 1 Number!";
-        }
-        elseif(!preg_match("#[A-Z]+#",$password)) {
-            $passwordErr = "Your Password Must Contain At Least 1 Capital Letter!";
-        }
-        elseif(!preg_match("#[a-z]+#",$password)) {
-            $passwordErr = "Your Password Must Contain At Least 1 Lowercase Letter!";
-        }
-    }
-    elseif(!empty($_POST["password"])) {
-        $cpasswordErr = "Please Check You've Entered Or Confirmed Your Password!";
-    } else {
-         $passwordErr = "Please enter password   ";
-    }
+
     ?>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script>
+
+    </script>
 </body>
