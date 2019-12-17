@@ -1,0 +1,5 @@
+{
+    "require": {
+        "mflor/pwned": "^1.1"
+    }
+}
