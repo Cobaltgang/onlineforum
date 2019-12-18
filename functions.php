@@ -94,13 +94,13 @@ public static function createSession($username, $user_id, $token, $serial){
    
 
 }
-public static function deleteRecord($dbh, $username, $user_id){
-    $query =('DELETE FROM sessions WHERE session_userid= :session_userid');
+public static function deleteRecord($dbh, $serial, $token){
+    $query =('DELETE FROM sessions WHERE session_serial= :session_serial AND session_token=:session_token');
 
     $stmt = $dbh->prepare($query);
-    $stmt->execute(array(':session_userid' => $user_id));
-                             
+    $stmt->execute(array(':session_serial' => $serial, ':session_token' => $token));
 
+echo 'Deleted';
 
 }
 

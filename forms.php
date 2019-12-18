@@ -31,6 +31,7 @@ include 'server.php';
                         <div class="col-md-6 login-form-1">
                             <h3>Login</h3>
                             <form action="forms.php" method="POST">
+                            
                                 <div class="form-group">
                                     <input type="text" class="form-control" type="text" name="username" id = "txt" onkeyup = "Validate(this)" placeholder="username" required placeholder="Username"
                                         value="" />
@@ -45,6 +46,10 @@ include 'server.php';
                                 <div class="form-group">
                                     <a href="#" class="ForgetPwd">Forget Password?</a>
                                 </div>
+                                <?php if (count($errors) > 0) {
+                                echo "Error Logging in";
+                            } ?>
+                            <?php include('errors.php'); ?>
                             </form>
                         </div>
                         <div class="col-md-6 login-form-2">
