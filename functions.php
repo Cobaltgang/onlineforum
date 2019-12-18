@@ -1,11 +1,10 @@
 <?php
-
+    require_once './includes/CryptoLib.php';
 class func{
     public static function checkLoginState($dbh)
     {
         if(!isset($_SESSION['id']) || !isset($_COOKIE['PHPSESSID'])){
             session_start();
-            echo'start session';
         }
         if (isset($_COOKIE['id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])){
             echo'1';
@@ -26,12 +25,15 @@ class func{
                     $row['session_token']==$_COOKIE['token'] &&
                     $row['session_serial']==$_COOKIE['serial']
                 ){
-                    echo'2';
                     if($row['session_userid'] ==$_SESSION['userid']&&
                     $row['session_token']==$_SESSION['token'] &&
                     $row['session_serial']==$_SESSION['serial']){
                         return true;
-                        echo'log in';
+                        
+                    }
+                    else{
+                        create_session($_COOKIE['username'], $_COOKIE['user_id'], $_COOKIE['token'], $_COOKIE['serial']);
+                        return true;
                     }
                 }
 
@@ -40,43 +42,57 @@ class func{
     }
 }
 
-public static function createRecord($dbh){
+public static function createRecord($dbh, $username, $user_id){
     $query =('DELETE FROM sessions WHERE session_userid= :session_userid;');
 
     $stmt = $dbh->prepare($query);
-    $stmt->execute(array(':session_userid' => $userid));
-    
+    $stmt->execute(array(':session_userid' => $user_id));
+    echo'session deleted';
 
     $date = date('d/m/Y');
     $token = CryptoLib::randomString(64);
     $serial = CryptoLib::randomString(64);
 
     func::createCookie($username, $user_id, $token, $serial);
-    func::createSession($username, $token, $serial);
-    
-    $dbh -> prepare('INSERT INTO sessions(session_userid, session_token, session_serial, session_date) VALUES (:session_userid,:token, :serial, :date )');
-    $stmt = $dbh->prepare($query);
-    $stmt->execute(array(':session_userid' => $userid, ':token' => $token, ':serial' =>$serial, ':date' =>$date));
+    func::createSession($username, $user_id, $token, $serial);
+    $query = "INSERT INTO sessions (session_userid, session_token, session_serial, session_date) VALUES (:user_id, :token, :serial, :date);";
+		$stmt = $dbh->prepare($query);
+		$stmt->execute(array(':user_id' => $user_id,
+							 ':token' => $token,
+                             ':serial' => $serial,
+                            ':date'=>$date));
+                             
+
 
 }
 
 public static function createCookie($username, $user_id, $token, $serial){
-    setcookie('user_id', $user_id, time() + (86400) *30, "/");
-    setcookie('token', $token, time() + (86400) *30, "/");
-    setcookie('serial', $serial, time() + (86400) *30, "/");
+    setcookie('username', $username, time() + (86400) *10, "/");
+    setcookie('session_userid', $user_id, time() + (86400) *10, "/");
+    setcookie('token', $token, time() + (86400) *10, "/");
+    setcookie('serial', $serial, time() + (86400) *10, "/");
+}
+
+public static function deleteCookie($username, $user_id, $token, $serial){
+    setcookie('username', time() - 3600);
+    setcookie('session_userid', time() - 3600);
+    setcookie('token',  time() - 3600);
+    setcookie('serial', time() - 3600);
 }
 
 public static function createSession($username, $user_id, $token, $serial){
-    if(!isset($_SESSION['id']) || !isset($_COOKIE['PHPSESSID'])){
+    if(!isset($_SESSION)){
         session_start();
     }
-    else{
+    
+    $_SESSION['username'] = $username;
+    $_SESSION['serial'] = $serial;
+    $_SESSION['token'] = $token;
+    $_SESSION['user_id'] = $user_id;
 
     
-    setcookie('user_id', $user_id, time() + (86400) *30, "/");
-    setcookie('token', $token, time() + (86400) *30, "/");
-    setcookie('serial', $serial, time() + (86400) *30, "/");
-    }
+   
+
 }
 
 }
