@@ -16,7 +16,7 @@ if (isset($_POST['login_user'])) {
     }
     if (count($errors) == 0) {
 	
-    $query = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $query = "SELECT * FROM users WHERE username = :username AND password = :password";
             $stmt = $dbh->prepare($query);
             $stmt->execute(array(':username' => $username, ':password' =>$password));
 
@@ -40,6 +40,9 @@ if (isset($_POST['login_user'])) {
             if (empty($username)) { array_push($errors, "Username is required"); }
             if (empty($email)) { array_push($errors, "Email is required"); }
             if (empty($password)) { array_push($errors, "Password is required"); }
+            if (htmlspecialchars(strip_tags($password1))) { array_push($errors, "Invalid password entered"); }
+            if (htmlspecialchars(strip_tags($email))) { array_push($errors, "Invalid email entered"); }
+            if (htmlspecialchars(strip_tags($username))) { array_push($errors, "Invalid username entered"); }
             if ($password1 != $password2) {
                 array_push($errors, "The two passwords do not match");
             }
