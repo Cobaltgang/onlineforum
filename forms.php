@@ -28,7 +28,7 @@
                             <h3>Login</h3>
                             <form>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="lname" placeholder="Your Email *"
+                                    <input required type="text" class="form-control" minlength="4" type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id = "email"  onkeyup="emailCheck();" placeholder="Your Email *"
                                         value="" />
                                 </div>
                                 <div class="form-group">
