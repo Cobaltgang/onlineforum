@@ -1,7 +1,9 @@
 <?php
 include 'config.php';
 include 'functions.php';
+require_once './vendor/autoload.php';
 $errors = array();
+$pwned = new \MFlor\Pwned\Pwned();
 
 if (isset($_POST['login_user'])) {
     $username = trim(htmlspecialchars($_POST['username']));
@@ -41,20 +43,39 @@ if (isset($_POST['login_user'])) {
             if ($password1 != $password2) {
                 array_push($errors, "The two passwords do not match");
             }
-            echo $username;
-            echo $email;
-            echo $password1;
-            if (count($errors) == 0) {
-                $query = "INSERT INTO users (username, email, password) VALUES( username = :username ,email =:email, password = :password)";
-                $stmt = $dbh->prepare($query);
-                $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$password));
-    
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);  
-                if($row['user_id'] > 0){
-                    func::createRecord($dbh, $row['username'], $row['user_id']);
-                    header("location:index.php");
+            $query1 = "SELECT * FROM users WHERE username = :username";
+            $stmt1 = $dbh->prepare($query1);
+            $stmt1->execute(array(':username' => $username));
+            $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+
+            $query2 = "SELECT * FROM users WHERE email = :email";
+            $stmt2 = $dbh->prepare($query2);
+            $stmt2->execute(array(':email' => $email));
+            $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+            if($row2['user_id'] > 0){
+                array_push($errors, "email already in use");
+            }
+            if($row1['user_id'] > 0){
+                array_push($errors, "Username taken");
+            }
+            $weak = $pwned->passwords()->occurences($password1);
+            $occur =  (int)$weak;
+            if($occur > 0){
+                array_push($errors, "Please choose a more secure password, that password has been found in many leaks.");
+            }
+            else{
+                if (count($errors) == 0) {
+                    $query = "INSERT INTO users (username, email, password) VALUES(:username ,:email,:password)";
+                    $stmt = $dbh->prepare($query);
+                    $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$password1));
+        
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);  
+                    if($row['user_id'] > 0){
+                        header("location:index.php");
+                    }
                 }
             }
+            
 
         }
 ?>
