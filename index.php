@@ -4,11 +4,7 @@ session_start();
   	$_SESSION['msg'] = "You must log in first";
   	header('location: forms.php');
   }
-  if (isset($_GET['logout'])) {
-  	session_destroy();
-  	unset($_SESSION['username']);
-  	header("location: forms.php");
-  }?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +45,7 @@ session_start();
             <a class="nav-link" href="#">Account</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Post</a>
+            <a class="nav-link" href="create_post.php">Post</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">My Posts</a>
@@ -71,8 +67,8 @@ session_start();
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Page Heading
-          <small>Secondary Text</small>
+        <h1 class="my-4">NCI Forum
+          <!-- <small>Secondary Text</small> -->
         </h1>
 
         <!-- Blog Post -->

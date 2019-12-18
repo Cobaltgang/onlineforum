@@ -1,3 +1,11 @@
+<?php 
+session_start();
+include 'upload.php';
+if (!isset($_SESSION['username'])) {
+  $_SESSION['msg'] = "You must log in first";
+  header('location: forms.php');
+}
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,25 +16,33 @@
   </head>
   <body>
     <div class="testbox">
-      <form action="/">
+      <form action="create_post.php" method="POST">
         <div class="banner">
           <h1>Create Post</h1>
         </div>
         <div class="item">
           <p>Title</p>
           <div class="item">
-            <input type="text" name="title" id="title" placeholder="Catchy Title" required/>
+            <input type="text" name="title" id="title" onkeyup = "Validate(this)" placeholder="Catchy Title" required/>
           </div>
         </div>
         <div class="item">
           <p>Body</p>
-          <textarea rows="3" name="body" id="body" required></textarea>
+          <textarea rows="3" name="body" id="body" onkeyup = "Validate(this)" required></textarea>
         </div>
-        
+        <?php if (count($errors) > 0) {
+                                echo "";
+                            } ?>
+                            <?php include('errors.php'); ?>
         <div class="btn-block">
-          <button type="submit" href="/">Post</button>
+          <button type="submit" name="create_post" >Post</button>
         </div>
       </form>
     </div>
+    <script>
+    function Validate(txt) {
+    txt.value = txt.value.replace(/[^a-zA-Z-'\n\r.]+/g, '');
+}
+    </script>
   </body>
 </html>
