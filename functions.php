@@ -3,7 +3,7 @@
 class func{
     public static function checkLoginState($dbh)
     {
-        if(!isset($_SESSION['id']) || !isset($_COOKIE['PHPSESSID'])){
+        if(!isset($_SESSION)){
             session_start();
         }
         if (isset($_COOKIE['id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])){
@@ -73,7 +73,7 @@ public static function createCookie($username, $user_id, $token, $serial){
     setcookie('serial', $serial, time() + (86400) *10, "/");
 }
 
-public static function deleteCookie($username, $user_id, $token, $serial){
+public static function deleteCookie(){
     setcookie('username', time() - 3600);
     setcookie('session_userid', time() - 3600);
     setcookie('token',  time() - 3600);

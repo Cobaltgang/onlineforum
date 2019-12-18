@@ -1,7 +1,6 @@
-<?php
 
-
-include_once('functions.php');
+<?php include_once('header.php');
 func::deleteCookie();
 
-header('location:index.php');
+header('location:login.php');
+ ?>
