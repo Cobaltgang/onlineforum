@@ -32,7 +32,7 @@ class func{
                         
                     }
                     else{
-                        create_session($_COOKIE['username'], $_COOKIE['user_id'], $_COOKIE['token'], $_COOKIE['serial']);
+                        createSession($_COOKIE['username'], $_COOKIE['user_id'], $_COOKIE['token'], $_COOKIE['serial']);
                         return true;
                     }
                 }

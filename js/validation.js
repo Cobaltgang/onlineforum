@@ -1,7 +1,7 @@
 
 // validates text only
 function Validate(txt) {
-    txt.value = txt.value.replace(/[^a-zA-Z-'\n\r.]+/g, '');
+    txt.value = txt.value.replace(/[^A-Za-z0-9]/g, '');
 }
 // validate email
 function email_validate(email)

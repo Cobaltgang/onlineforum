@@ -4,10 +4,9 @@ session_start();
   	$_SESSION['msg'] = "You must log in first";
   	header('location: forms.php');
   }
-  include_once 'functions/posts.php';
+  include_once 'functions/userposts.php';
   $titles = getAllPostTitles();
-  $messages = getAllPostMessages();
-  $authors = getAllPostAuthors();
+  $messages = getAllPostMessages(); 
   $max = sizeof($titles)-1;
 ?>
 <!DOCTYPE html>
@@ -52,10 +51,11 @@ session_start();
           <div class="card-body">
             <h2 class="card-title"><?php echo $titles[$x]; ?></h2>
             <p class="card-text"><?php echo $messages[$x]; ?></p>
-            <!-- <a href="#" class="btn btn-primary">Read More &rarr;</a> -->
+            <a href="#" class="btn btn-primary">Read More &rarr;</a>
           </div>
           <div class="card-footer text-muted">
-            Posted by <?php echo $authors[$x]; ?>
+            Posted by
+            <a href="#">Start Bootstrap</a>
           </div>
         </div>
         <?php } ?>
@@ -87,14 +87,14 @@ session_start();
         </div> -->
 
         <!-- Pagination -->
-        <!-- <ul class="pagination justify-content-center mb-4">
+        <ul class="pagination justify-content-center mb-4">
           <li class="page-item">
             <a class="page-link" href="#">&larr; Older</a>
           </li>
           <li class="page-item disabled">
             <a class="page-link" href="#">Newer &rarr;</a>
           </li>
-        </ul> -->
+        </ul>
 
       </div>
 

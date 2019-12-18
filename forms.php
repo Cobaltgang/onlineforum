@@ -1,5 +1,5 @@
 <?php
-include 'server.php';
+include 'functions/server.php';
 
 ?>
 <!DOCTYPE html>
