@@ -51,11 +51,11 @@ session_start();
           <div class="card-body">
             <h2 class="card-title"><?php echo $titles[$x]; ?></h2>
             <p class="card-text"><?php echo $messages[$x]; ?></p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            <form action="myposts.php"  method="POST">
+            <button class="btn btn-primary" type="submit" name="delete" >Delete</button>
+            </form>
           </div>
           <div class="card-footer text-muted">
-            Posted by
-            <a href="#">Start Bootstrap</a>
           </div>
         </div>
         <?php } ?>
@@ -96,6 +96,12 @@ session_start();
           </li>
         </ul>
 
+      </div>
+      <div class="col-md-4">
+      <h4 class="my-4"><?php include 'messages.php' ?>
+          <!-- <small>Secondary Text</small> -->
+        </h4>
+      
       </div>
 
 

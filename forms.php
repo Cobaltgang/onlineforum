@@ -50,6 +50,7 @@ include 'functions/server.php';
                                 echo "Error Logging in";
                             } ?>
                             <?php include('errors.php'); ?>
+                            <?php include 'messages.php' ?>
                             </form>
                         </div>
                         <div class="col-md-6 login-form-2">

@@ -40,9 +40,6 @@ if (isset($_POST['login_user'])) {
             if (empty($username)) { array_push($errors, "Username is required"); }
             if (empty($email)) { array_push($errors, "Email is required"); }
             if (empty($password)) { array_push($errors, "Password is required"); }
-            if (htmlspecialchars(strip_tags($password1))) { array_push($errors, "Invalid password entered"); }
-            if (htmlspecialchars(strip_tags($email))) { array_push($errors, "Invalid email entered"); }
-            if (htmlspecialchars(strip_tags($username))) { array_push($errors, "Invalid username entered"); }
             if ($password1 != $password2) {
                 array_push($errors, "The two passwords do not match");
             }
@@ -72,7 +69,8 @@ if (isset($_POST['login_user'])) {
                     $stmt = $dbh->prepare($query);
                     $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$password1));
         
-                    $row = $stmt->fetch(PDO::FETCH_ASSOC);  
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC); 
+                    $_SESSION['message'] = "User Registered Successfully please Login to Continue"; 
                     if($row['user_id'] > 0){
                         header("location:index.php");
                     }
