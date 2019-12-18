@@ -1,11 +1,11 @@
 <?php include_once("header.php");
-?>
+?>  
 
 <div>
    
    <?php
     if (!func::checkLoginState($dbh)){
-        
+
         if(isset($_POST['username']) && isset($_POST['password'])){
             echo'Logged in';
             $query = "SELECT * FROM users WHERE username = :username AND password = :password";

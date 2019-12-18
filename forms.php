@@ -1,3 +1,7 @@
+<?php
+include 'server.php';
+
+?>
 <!DOCTYPE html>
 
 <head>
@@ -26,17 +30,17 @@
                     <div class="row">
                         <div class="col-md-6 login-form-1">
                             <h3>Login</h3>
-                            <form>
+                            <form action="forms.php" method="POST">
                                 <div class="form-group">
-                                    <input required type="text" class="form-control" minlength="4" type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id = "email"  onkeyup="emailCheck();" placeholder="Your Email *"
+                                    <input type="text" class="form-control" type="text" name="username" id = "txt" onkeyup = "Validate(this)" placeholder="username" required placeholder="Username"
                                         value="" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" name="lpassword"
+                                    <input type="password" class="form-control" name="password"
                                         placeholder="Your Password *" value="" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btnSubmit" value="Login" />
+                                    <input type="submit" name="login_user" class="btnSubmit" value="Login" />
                                 </div>
                                 <div class="form-group">
                                     <a href="#" class="ForgetPwd">Forget Password?</a>
@@ -45,7 +49,7 @@
                         </div>
                         <div class="col-md-6 login-form-2">
                             <h3>Register</h3>
-                            <form>
+                            <form action="forms.php" method="POST">
                                 <div class="form-group">
                                     <input type="text" class="form-control" type="text" name="username" id = "txt" onkeyup = "Validate(this)" placeholder="username" required placeholder="Username"
                                         value="" />
@@ -59,12 +63,12 @@
                                         value="" />
                                 </div>
                                 <div class="form-group">
-                                    <input required name="password" type="password" class="form-control inputpass" minlength="8" maxlength="16" placeholder="Enter again to validate"  id="cpassword" onkeyup="checksimilarity();" />
+                                    <input required name="cpassword" type="password" class="form-control inputpass" minlength="8" maxlength="16" placeholder="Enter again to validate"  id="cpassword" onkeyup="checksimilarity();" />
                                 </div>
                                 <div class="form-group" id ="match">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" id="submit" class="btnSubmit" value="Submit"/>
+                                    <input type="submit" id="submit" name = "reg_user"  class="btnSubmit" value="Submit"/>
                                 </div>
                                 <div id="match">
                                     <p id ="1"></p>
