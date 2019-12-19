@@ -1,0 +1,84 @@
+nmap -v -A nciforum.herokuapp.com
+Starting Nmap 7.80 ( https://nmap.org ) at 2019-12-19 21:14 GMT
+NSE: Loaded 151 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 21:14
+Completed NSE at 21:14, 0.00s elapsed
+Initiating NSE at 21:14
+Completed NSE at 21:14, 0.00s elapsed
+Initiating NSE at 21:14
+Completed NSE at 21:14, 0.00s elapsed
+Initiating Ping Scan at 21:14
+Scanning nciforum.herokuapp.com (34.255.19.16) [2 ports]
+Completed Ping Scan at 21:14, 0.00s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 21:14
+Completed Parallel DNS resolution of 1 host. at 21:14, 0.09s elapsed
+Initiating Connect Scan at 21:14
+Scanning nciforum.herokuapp.com (34.255.19.16) [1000 ports]
+Discovered open port 110/tcp on 34.255.19.16
+Discovered open port 143/tcp on 34.255.19.16
+Discovered open port 993/tcp on 34.255.19.16
+Discovered open port 995/tcp on 34.255.19.16
+Discovered open port 443/tcp on 34.255.19.16
+Discovered open port 80/tcp on 34.255.19.16
+Completed Connect Scan at 21:14, 4.59s elapsed (1000 total ports)
+Initiating Service scan at 21:14
+Scanning 6 services on nciforum.herokuapp.com (34.255.19.16)
+Service scan Timing: About 50.00% done; ETC: 21:20 (0:02:36 remaining)
+Completed Service scan at 21:17, 161.10s elapsed (6 services on 1 host)
+NSE: Script scanning 34.255.19.16.
+Initiating NSE at 21:17
+Completed NSE at 21:18, 35.52s elapsed
+Initiating NSE at 21:18
+Completed NSE at 21:20, 134.32s elapsed
+Initiating NSE at 21:20
+Completed NSE at 21:20, 0.00s elapsed
+Nmap scan report for nciforum.herokuapp.com (34.255.19.16)
+Host is up (0.0030s latency).
+Other addresses for nciforum.herokuapp.com (not scanned): 52.212.3.250 52.18.167.83 52.16.211.175 54.246.187.84 52.17.181.235 52.208.237.242 34.246.138.164
+rDNS record for 34.255.19.16: ec2-34-255-19-16.eu-west-1.compute.amazonaws.com
+Not shown: 994 filtered ports
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Cowboy httpd
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| http-server-header: 
+|   Apache
+|_  Cowboy
+| http-title: Juniper Web Filtering
+|_Requested resource was forms.php
+|_http-trane-info: Problem with XML parsing of /evox/about
+110/tcp open  pop3?
+143/tcp open  imap?
+443/tcp open  ssl/http Cowboy httpd
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| http-server-header: 
+|   Apache
+|_  Cowboy
+| http-title: Site doesn't have a title (text/html; charset=UTF-8).
+|_Requested resource was forms.php
+| ssl-cert: Subject: commonName=*.herokuapp.com/organizationName=Heroku, Inc./stateOrProvinceName=California/countryName=US
+| Subject Alternative Name: DNS:*.herokuapp.com, DNS:herokuapp.com
+| Issuer: commonName=DigiCert SHA2 High Assurance Server CA/organizationName=DigiCert Inc/countryName=US
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-04-19T00:00:00
+| Not valid after:  2020-06-22T12:00:00
+| MD5:   1c42 24af e4ff 1642 fc8e bd3b e7c2 f591
+|_SHA-1: 083b 7172 0243 6eca ed42 8693 ba7e df81 c4bc 6230
+|_ssl-date: TLS randomness does not represent time
+993/tcp open  imaps?
+995/tcp open  pop3s?
+
+NSE: Script Post-scanning.
+Initiating NSE at 21:20
+Completed NSE at 21:20, 0.00s elapsed
+Initiating NSE at 21:20
+Completed NSE at 21:20, 0.00s elapsed
+Initiating NSE at 21:20
+Completed NSE at 21:20, 0.00s elapsed
+Read data files from: /usr/local/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 336.93 seconds
