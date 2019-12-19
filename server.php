@@ -14,6 +14,21 @@ if (isset($_POST['login_user'])) {
 	if (empty($password)) {
 		array_push($errors, "Password is required");
     }
+    $query = "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE :IPaddress AND `timestamp` > (now() - interval 10 minute)";
+                $stmt = $dbh->prepare($query);
+                $stmt->execute(array(':IPaddress' => $IPaddress));
+
+                $count = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+
+
+
+    
+
+        if($count[0] > 3){
+        echo "Your are allowed 3 attempts in 10 minutes";
+        }
+        if($count[0] < 3){
     if (count($errors) == 0) {
 	
         $query = "SELECT * FROM users WHERE username = :username ";
@@ -23,30 +38,25 @@ if (isset($_POST['login_user'])) {
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if(password_verify($password, $row['password'])) {
-                /*$ip = $_SERVER["REMOTE_ADDR"];
-                $query = "INSERT INTO `ip` (`address` ,`timestamp`)VALUES (:ip, CURRENT_TIMESTAMP)";
-                $stmt = $dbh->prepare($query);
-                $stmt->execute(array(':ip' => $ip));
-
-                "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE '$ip' AND `timestamp` > (now() - interval 10 minute)
                 
-
-
-
-    
-
-        if($count[0] > 3){
-        echo "Your are allowed 3 attempts in 10 minutes";*/
-        }
+       
                 func::createRecord($dbh, $row['username'], $row['user_id']);
                 header("location:index.php");
+        
             }
             else{
                 array_push($errors, "The account name or password that you have entered is incorrect.");
+                $IPaddress= func::get_client_ip();
+                $query = "INSERT INTO `ip` (`address` ,`timestamp`)VALUES (:ip, CURRENT_TIMESTAMP)";
+                $stmt = $dbh->prepare($query);
+                $stmt->execute(array(':ip' => $IPaddress));
+
+                
             }
         
             
         }
+    }
     
 
         if (isset($_POST['reg_user'])) {
