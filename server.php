@@ -14,6 +14,7 @@ if (isset($_POST['login_user'])) {
 	if (empty($password)) {
 		array_push($errors, "Password is required");
     }
+    $IPaddress= func::get_client_ip();
     $query = "SELECT COUNT(*) AS address FROM `ip` WHERE `address` LIKE :IPaddress AND `timestamp` > (now() - interval 10 minute)";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute(array(':IPaddress' => $IPaddress));
