@@ -83,8 +83,8 @@ public static function redirect(){
 public static function createCookie($username, $user_id, $token, $serial){
 setcookie('username', $username, time() + (86400) *10, "/", null, true, true/*, ['samesite'=>'Strict']*/);
 setcookie('session_userid', $user_id, time() + (86400) *10, "/", null, true, true/*, /*['samesite'=>'Strict']*/);
-setcookie('token', $token, time() + (86400) *10, "/", null, true, true/*, ['samesite'=>'Strict']*/);
-setcookie('serial', $serial, time() + (86400) *10, "/", null, true, true/*, ['samesite'=>'Strict']*/);
+setcookie('token', $token, time() + (86400) *10, "/", null, true, true, /*['samesite'=>'Strict']*/);
+setcookie('serial', $serial, time() + (86400) *10, "/", null, true, true, /*['samesite'=>'Strict']*/);
 
 }
 
