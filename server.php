@@ -19,25 +19,25 @@ if (isset($_POST['login_user'])) {
                 $stmt->execute(array(':IPaddress' => $IPaddress));
 
                 $count = $stmt->fetch(PDO::FETCH_ASSOC);
-                
+                */
 
 
 
     
 
-                if ($row['address'] > 0)
+               /* if ($row['address'] > 0)
                 {
             echo "Your are allowed 3 attempts in 10 minutes";
         }
         if($count[0] < 3){
             if ($row['address'] > 0) {
-	
+	*/
         $query = "SELECT * FROM users WHERE username = :username ";
             $stmt = $dbh->prepare($query);
             $stmt->execute(array(':username' => $username));
 
 
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);*/
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if(password_verify($password, $row['password'])) {
                 
        
@@ -56,10 +56,10 @@ if (isset($_POST['login_user'])) {
             }
         
             
-        }
+        //}
     //}
     
-
+        }
         if (isset($_POST['reg_user'])) {
             $username=trim(htmlspecialchars($_POST['username']));
             $email=$_POST['email'];
