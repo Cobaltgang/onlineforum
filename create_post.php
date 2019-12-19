@@ -1,9 +1,10 @@
 <?php 
 session_start();
 include 'posts.php';
-if (!isset($_SESSION['username'])) {
-  $_SESSION['msg'] = "You must log in first";
-  header('location: forms.php');
+if (!func::checkLoginState($dbh))
+{
+  
+  header("location:forms.php");
 }
  ?>
 <!DOCTYPE html>
