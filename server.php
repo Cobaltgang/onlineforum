@@ -22,9 +22,9 @@ if (isset($_POST['login_user'])) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
 
-                if ($row['address'] > 3)
+                if ($row['address'] > 4)
                 {
-            echo "Your are allowed 3 attempts in 10 minutes";
+                    array_push($errors, "Too many login attempts, try again after 10 minutes"); 
         }
         if ($row['address'] <= 3){
         
