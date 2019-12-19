@@ -20,11 +20,7 @@ if (isset($_POST['login_user'])) {
                 $stmt->execute(array(':IPaddress' => $IPaddress));
 
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                
-
-
-
-    
+        
 
                 if ($row['address'] > 3)
                 {
@@ -46,7 +42,7 @@ if (isset($_POST['login_user'])) {
                 header("location:index.php");
         
             }
-        }
+
             else{
                 array_push($errors, "The account name or password that you have entered is incorrect.");
                 $IPaddress= func::get_client_ip();
@@ -56,6 +52,8 @@ if (isset($_POST['login_user'])) {
 
                 
             }
+        }
+           
         
         }            
         
