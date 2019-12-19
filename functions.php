@@ -2,45 +2,51 @@
     require_once './includes/CryptoLib.php';
 class func{
     public static function checkLoginState($dbh)
-    {
-        if(!isset($_SESSION)){
-            session_start();
-        }
-        if (isset($_COOKIE['id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])){
-            echo'1';
-            $query = "SELECT * FROM sessions WHERE session_userid= :userid AND session_token = :token AND session_serial = :serial;";
+	{
+		if (!isset($_SESSION))
+		{
+			session_start();
+		}
+		if (isset($_COOKIE['session_userid']) && isset($_COOKIE['token']) && isset($_COOKIE['serial']))
+		{
+			$query = "SELECT * FROM sessions WHERE session_userid = :userid AND session_token = :token AND session_serial = :serial;";
 
-            $userid = $_COOKIE['userid'];
-            $token = $_COOKIE['token'];
-            $serial = $_COOKIE['serial'];
+			$userid = $_COOKIE['session_userid'];
+			$token = $_COOKIE['token'];
+			$serial = $_COOKIE['serial'];
 
-            $stmt = $dbh->prepare($query);
-            $stmt->execute(array(':userid' =>$userid, ':token' => $token, ':serial' =>$serial));
+			$stmt = $dbh->prepare($query);
+			$stmt->execute(array(':userid' => $userid, 
+								 ':token' => $token, 
+								 ':serial' => $serial));
 
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if($row['session_userid'] >0){
-                if(
-                    $row['session_userid'] ==$_COOKIE['userid']&&
-                    $row['session_token']==$_COOKIE['token'] &&
-                    $row['session_serial']==$_COOKIE['serial']
-                ){
-                    if($row['session_userid'] ==$_SESSION['userid']&&
-                    $row['session_token']==$_SESSION['token'] &&
-                    $row['session_serial']==$_SESSION['serial']){
-                        return true;
-                        
-                    }
-                    else{
-                        createSession($_COOKIE['username'], $_COOKIE['user_id'], $_COOKIE['token'], $_COOKIE['serial']);
-                        return true;
-                    }
-                }
-
-            
-        }
-    }
-}
+			if ($row['session_userid'] > 0)
+			{
+				if (
+					$row['session_userid'] == $_COOKIE['session_userid'] &&
+					$row['session_token']  == $_COOKIE['token']  &&
+					$row['session_serial'] == $_COOKIE['serial']
+					)
+				{
+					if (
+					$row['session_userid'] == $_SESSION['session_userid'] &&
+					$row['session_token']  == $_SESSION['token']  &&
+					$row['session_serial'] == $_SESSION['serial']
+						)
+					{
+						return true;
+					}
+					else
+					{
+						func::createSession($_COOKIE['username'], $_COOKIE['userid'], $_COOKIE['token'], $_COOKIE['serial']);
+						return true;
+					}
+				}
+			}
+		}
+	}
 
 public static function createRecord($dbh, $username, $user_id){
     $query =('DELETE FROM sessions WHERE session_userid= :session_userid;');
@@ -74,10 +80,10 @@ public static function createCookie($username, $user_id, $token, $serial){
 }
 
 public static function deleteCookie(){
-    setcookie('username', time() - 3600);
-    setcookie('session_userid', time() - 3600);
-    setcookie('token',  time() - 3600);
-    setcookie('serial', time() - 3600);
+    setcookie('username', "", time() - 3600);
+    setcookie('session_userid', "", time() - 3600);
+    setcookie('token',  "", time() - 3600);
+    setcookie('serial',"",  time() - 3600);
 }
 
 public static function createSession($username, $user_id, $token, $serial){

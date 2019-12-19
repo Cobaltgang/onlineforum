@@ -1,20 +1,27 @@
-<?php
-include_once("header.php")
+<?php 
+include_once("header.php");
 
-?>
-<div>
-    
-     <?php
+ ?>
 
-     if(!func::checkLoginState($dbh)){
-         echo 'Welcome ' . $_SESSION['username'] . '!';
-     }
-     else{
-         header("location:login.php");
-         exit();
-     }
-    ?>
-</div>
-<?php include_once("footer.php");
-?>
+<section class="parent">
+	<div class="child">
+		
+		<?php 
 
+			if (!func::checkLoginState($dbh))
+			{
+				header("location:login.php");
+				exit();
+			}
+
+			echo 'Welcome ' . $_SESSION['username'] . '!';
+			
+		 ?>
+		 
+	</div>
+
+</section>
+
+<?php 
+include_once("footer.php");
+ ?>
