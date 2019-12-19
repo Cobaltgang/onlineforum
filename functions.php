@@ -108,7 +108,7 @@ public static function deleteRecord($dbh, $serial, $token){
     $stmt = $dbh->prepare($query);
     $stmt->execute(array(':session_serial' => $serial, ':session_token' => $token));
 
-echo 'Deleted';
+
 
 }
 

@@ -72,11 +72,10 @@ if (isset($_POST['login_user'])) {
                     $query = "INSERT INTO users (username, email, password) VALUES(:username ,:email,:password)";
                     $stmt = $dbh->prepare($query);
                     $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$hash));
-        
-                    $row = $stmt->fetch(PDO::FETCH_ASSOC);  
-                    if($row['user_id'] > 0){
-                        header("location:index.php");
-                    }
+                    func::createRecord($dbh, $row['username'], $row['user_id']);
+                     header("location:index.php");
+                    
+                    
                 }
             }
             
