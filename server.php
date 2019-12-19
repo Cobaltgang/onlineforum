@@ -6,7 +6,7 @@ $errors = array();
 $pwned = new \MFlor\Pwned\Pwned();
 
 if (isset($_POST['login_user'])) {
-    $username = trim(htmlspecialchars($_POST['username']));
+    $username = ($_POST['username']);
 	$password = $_POST['password'];
     if (empty($username)) {
 		array_push($errors, "Username is required");
@@ -20,15 +20,13 @@ if (isset($_POST['login_user'])) {
             $stmt = $dbh->prepare($query);
             $stmt->execute(array(':username' => $username, ':password' =>$password));
 
+
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($password, $row['password'])) {
+                echo'verified';
+            }
+        
             
-            if($row['user_id'] > 0){
-                func::createRecord($dbh, $row['username'], $row['user_id']);
-                header("location:index.php");
-            }
-            else{
-                array_push($errors, "The account name or password that you have entered is incorrect.");
-            }
         }
     }
 
@@ -40,6 +38,7 @@ if (isset($_POST['login_user'])) {
             if (empty($username)) { array_push($errors, "Username is required"); }
             if (empty($email)) { array_push($errors, "Email is required"); }
             if (empty($password)) { array_push($errors, "Password is required"); }
+           
             if ($password1 != $password2) {
                 array_push($errors, "The two passwords do not match");
             }
@@ -65,12 +64,12 @@ if (isset($_POST['login_user'])) {
             }
             else{
                 if (count($errors) == 0) {
+                    $hash= password_hash($password1, PASSWORD_ARGON2I);
                     $query = "INSERT INTO users (username, email, password) VALUES(:username ,:email,:password)";
                     $stmt = $dbh->prepare($query);
-                    $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$password1));
+                    $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$hash));
         
-                    $row = $stmt->fetch(PDO::FETCH_ASSOC); 
-                    $_SESSION['message'] = "User Registered Successfully please Login to Continue"; 
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);  
                     if($row['user_id'] > 0){
                         header("location:index.php");
                     }
