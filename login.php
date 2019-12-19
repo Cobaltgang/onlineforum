@@ -1,8 +1,7 @@
 <?php include_once("header.php");
 ?>  
-
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <div>
-   
    <?php
     if (!func::checkLoginState($dbh)){
 

@@ -16,7 +16,7 @@ include_once("functions.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <head>
 
   <meta charset="utf-8">
