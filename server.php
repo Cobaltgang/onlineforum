@@ -14,24 +14,24 @@ if (isset($_POST['login_user'])) {
 	if (empty($password)) {
 		array_push($errors, "Password is required");
     }
-   /* $query = "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE :IPaddress AND `timestamp` > (now() - interval 10 minute)";
+    $query = "SELECT COUNT(*) AS address FROM `ip` WHERE `address` LIKE :IPaddress AND `timestamp` > (now() - interval 10 minute)";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute(array(':IPaddress' => $IPaddress));
 
-                $count = $stmt->fetch(PDO::FETCH_ASSOC);
-                */
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
 
 
 
     
 
-               /* if ($row['address'] > 0)
+                if ($row['address'] > 3)
                 {
             echo "Your are allowed 3 attempts in 10 minutes";
         }
-        if($count[0] < 3){
-            if ($row['address'] > 0) {
-	*/
+        if ($row['address'] < 3){
+        
+	
         $query = "SELECT * FROM users WHERE username = :username ";
             $stmt = $dbh->prepare($query);
             $stmt->execute(array(':username' => $username));
@@ -45,6 +45,7 @@ if (isset($_POST['login_user'])) {
                 header("location:index.php");
         
             }
+        }
             else{
                 array_push($errors, "The account name or password that you have entered is incorrect.");
                 $IPaddress= func::get_client_ip();
@@ -56,10 +57,10 @@ if (isset($_POST['login_user'])) {
             }
         
             
-        //}
-    //}
+        
     
-        }
+    
+        
         if (isset($_POST['reg_user'])) {
             $username=trim(htmlspecialchars($_POST['username']));
             $email=$_POST['email'];
