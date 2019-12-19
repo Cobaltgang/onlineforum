@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("posts.php");
-header("strict-transport-security: max-age=600");
+header("Strict-Transport-Security:max-age=63072000");
 
 if (!func::checkLoginState($dbh))
 {
