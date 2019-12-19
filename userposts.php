@@ -3,6 +3,8 @@ session_start();
 include 'config.php';
 $errors= array();
 
+
+
 function getAllPostTitles(){
     global $dbh;
     $user_id = $_SESSION['user_id'];
