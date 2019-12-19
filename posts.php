@@ -6,6 +6,8 @@ $errors= array();
 if(isset($_POST['create_post'])){
     createpost($dbh, $errors);
     }
+
+    
 function createpost($dbh,$errors){
     $title = htmlspecialchars(strip_tags($_POST['title']));
     $body = htmlspecialchars(strip_tags($_POST['body']));

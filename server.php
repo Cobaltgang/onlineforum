@@ -63,8 +63,12 @@ if (isset($_POST['login_user'])) {
             }
             $weak = $pwned->passwords()->occurences($password1);
             $occur =  (int)$weak;
+           
+        
             if($occur > 0){
-                array_push($errors, "Please choose a more secure password, that password has been found in many leaks.");
+                array_push($errors, "Please choose a more secure password, that password has been found in ".$occur." leaks.");
+                
+                
             }
             else{
                 if (count($errors) == 0) {
@@ -82,4 +86,12 @@ if (isset($_POST['login_user'])) {
             
 
         }
+
+        // function getOccurance(){
+        //     $password1 = $_POST['password'];
+        //     $pwned = new \MFlor\Pwned\Pwned();
+        //     $weak = $pwned->passwords()->occurences($password1);
+        //     $occur =  (int)$weak;
+        //     return $occur;
+        // }
 ?>

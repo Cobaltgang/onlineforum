@@ -1,6 +1,6 @@
 <?php
 include 'server.php';
-
+  
 ?>
 <!DOCTYPE html>
 
@@ -81,7 +81,7 @@ include 'server.php';
                                     <p id="2"></p>
                                     <p id="3"></p>
                                     <p id="4"></p>
-                                    <p id="5"></p>
+                                    <p id="5"> </p>
                                 </div>
                             </form>
                         </div>
