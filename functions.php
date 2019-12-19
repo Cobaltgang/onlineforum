@@ -31,7 +31,7 @@ class func{
 					)
 				{
 					if (
-					$row['session_userid'] == $_SESSION['session_userid'] &&
+					$row['session_userid'] == $_SESSION['user_id'] &&
 					$row['session_token']  == $_SESSION['token']  &&
 					$row['session_serial'] == $_SESSION['serial']
 						)
@@ -40,7 +40,7 @@ class func{
 					}
 					else
 					{
-						func::createSession($_COOKIE['username'], $_COOKIE['userid'], $_COOKIE['token'], $_COOKIE['serial']);
+						func::createSession($_COOKIE['username'], $_COOKIE['session_userid'], $_COOKIE['token'], $_COOKIE['serial']);
 						return true;
 					}
 				}
