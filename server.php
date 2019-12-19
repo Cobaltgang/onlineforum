@@ -25,11 +25,12 @@ if (isset($_POST['login_user'])) {
 
     
 
-        if($count[0] > 3){
-        echo "Your are allowed 3 attempts in 10 minutes";
+                if ($row['address'] > 0)
+                {
+            echo "Your are allowed 3 attempts in 10 minutes";
         }
         if($count[0] < 3){
-    if (count($errors) == 0) {
+            if ($row['address'] > 0) {
 	
         $query = "SELECT * FROM users WHERE username = :username ";
             $stmt = $dbh->prepare($query);
