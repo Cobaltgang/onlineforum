@@ -1,7 +1,6 @@
 <?php
 
 include 'config.php';
-include 'functions.php';
 $errors= array();
 
 function getAllPostTitles(){
@@ -19,16 +18,17 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 return $titles;
 
 }
-if(isset($_POST['delete'])){
+if(isset($_GET['del'])){
     deletepost();
     }
 function deletepost(){
+    $id = $_GET['del'];  
     global $dbh;
-    $user_id = $_SESSION['user_id'];
-    $query = "SELECT * FROM posts where user_id = :user_id";
+    $query = "DELETE FROM posts WHERE post_id=:id";
     $stmt = $dbh->prepare($query);
-    $stmt->execute(array(':user_id' => $user_id));
-    $_SESSION['message'] = "Post Deleted successfully";
+    $stmt->execute(array(':id' => $id));
+    header('location: myposts.php');
+    
 }
 function getAllPostMessages(){
     global $dbh;
@@ -55,6 +55,19 @@ function getAllPostAuthors(){
 
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $authors[]=$row['message'];
+}
+}
+function getid(){
+    global $dbh;
+    $user_id = $_SESSION['user_id'];
+    $query = "SELECT * FROM posts where user_id = :user_id";
+    $stmt = $dbh->prepare($query);
+    $stmt->execute(array(':user_id' => $user_id));
+   
+    $authors = array();
+
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $authors[]=$row['post_id'];
 }
 return $authors;
 }

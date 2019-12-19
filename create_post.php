@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include 'functions/posts.php';
+include 'posts.php';
 if (!isset($_SESSION['username'])) {
   $_SESSION['msg'] = "You must log in first";
   header('location: forms.php');

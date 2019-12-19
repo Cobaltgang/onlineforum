@@ -4,7 +4,7 @@ session_start();
   	$_SESSION['msg'] = "You must log in first";
   	header('location: forms.php');
   }
-  include_once 'functions/posts.php';
+  include_once 'posts.php';
   $titles = getAllPostTitles();
   $messages = getAllPostMessages();
   $authors = getAllPostAuthors();

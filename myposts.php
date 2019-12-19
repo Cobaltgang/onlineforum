@@ -4,9 +4,10 @@ session_start();
   	$_SESSION['msg'] = "You must log in first";
   	header('location: forms.php');
   }
-  include_once 'functions/userposts.php';
+  include_once 'userposts.php';
   $titles = getAllPostTitles();
-  $messages = getAllPostMessages(); 
+  $messages = getAllPostMessages();
+  $ids = getid(); 
   $max = sizeof($titles)-1;
 ?>
 <!DOCTYPE html>
@@ -51,16 +52,14 @@ session_start();
           <div class="card-body">
             <h2 class="card-title"><?php echo $titles[$x]; ?></h2>
             <p class="card-text"><?php echo $messages[$x]; ?></p>
-            <form action="myposts.php"  method="POST">
-            <button class="btn btn-primary" type="submit" name="delete" >Delete</button>
-            </form>
+            <a  href="userposts.php?del=<?php echo $ids[$x]; ?>" class="btn btn-primary">Delete Post</a>
           </div>
           <div class="card-footer text-muted">
           </div>
         </div>
         <?php } ?>
 
-        <!-- Blog Post -->
+        <!-- Blog Post -->  
         <!-- <div class="card mb-4">
           <div class="card-body">
             <h2 class="card-title">Post Title</h2>
