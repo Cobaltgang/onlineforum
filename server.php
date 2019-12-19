@@ -23,6 +23,21 @@ if (isset($_POST['login_user'])) {
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if(password_verify($password, $row['password'])) {
+                /*$ip = $_SERVER["REMOTE_ADDR"];
+                $query = "INSERT INTO `ip` (`address` ,`timestamp`)VALUES (:ip, CURRENT_TIMESTAMP)";
+                $stmt = $dbh->prepare($query);
+                $stmt->execute(array(':ip' => $ip));
+
+                "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE '$ip' AND `timestamp` > (now() - interval 10 minute)
+                
+
+
+
+    
+
+        if($count[0] > 3){
+        echo "Your are allowed 3 attempts in 10 minutes";*/
+        }
                 func::createRecord($dbh, $row['username'], $row['user_id']);
                 header("location:index.php");
             }
@@ -32,7 +47,7 @@ if (isset($_POST['login_user'])) {
         
             
         }
-    }
+    
 
         if (isset($_POST['reg_user'])) {
             $username=trim(htmlspecialchars($_POST['username']));

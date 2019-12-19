@@ -109,6 +109,31 @@ public static function createSession($username, $user_id, $token, $serial){
    
 
 }
+
+public static function get_client_ip() {
+	foreach (array('HTTP_CLIENT_IP',
+	'HTTP_X_FORWARDED_FOR',
+	'HTTP_X_FORWARDED',
+	'HTTP_X_CLUSTER_CLIENT_IP',
+	'HTTP_FORWARDED_FOR',
+	'HTTP_FORWARDED',
+	'REMOTE_ADDR') as $key){
+if (array_key_exists($key, $_SERVER) === true){
+foreach (explode(',', $_SERVER[$key]) as $IPaddress){
+ $IPaddress = trim($IPaddress); // Just to be safe
+
+ if (filter_var($IPaddress,
+				FILTER_VALIDATE_IP,
+				FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)
+	 !== false) {
+
+	 return $IPaddress;
+ }
+}
+}
+}
+}
+
 public static function deleteRecord($dbh, $serial, $token){
     $query =('DELETE FROM sessions WHERE session_serial= :session_serial AND session_token=:session_token');
 
