@@ -1,14 +1,18 @@
 <?php
 session_start();
-  if (!isset($_SESSION['username'])) {
-  	$_SESSION['msg'] = "You must log in first";
-  	header('location: forms.php');
-  }
+include_once("functions.php");
+
   include_once 'userposts.php';
   $titles = getAllPostTitles();
   $messages = getAllPostMessages();
   $ids = getid(); 
   $max = sizeof($titles)-1;
+
+  if (!func::checkLoginState($dbh))
+{
+  
+  header("location:forms.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
