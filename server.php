@@ -72,8 +72,9 @@ if (isset($_POST['login_user'])) {
                     $query = "INSERT INTO users (username, email, password) VALUES(:username ,:email,:password)";
                     $stmt = $dbh->prepare($query);
                     $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$hash));
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC); 
                     func::createRecord($dbh, $row['username'], $row['user_id']);
-
+                    
                     $_SESSION['message'] = "User registered successfully, please login to continue";  
                     
                 }
