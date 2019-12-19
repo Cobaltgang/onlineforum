@@ -73,8 +73,8 @@ if (isset($_POST['login_user'])) {
                     $stmt = $dbh->prepare($query);
                     $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$hash));
                     func::createRecord($dbh, $row['username'], $row['user_id']);
-                     func::redirect();
-                    
+
+                    $_SESSION['message'] = "User registered successfully, please login to continue";  
                     
                 }
             }
