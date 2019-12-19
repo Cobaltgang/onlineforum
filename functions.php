@@ -1,5 +1,7 @@
 <?php
-    require_once './includes/CryptoLib.php';
+	require_once './includes/CryptoLib.php';
+	header("strict-transport-security: max-age=600");
+
 class func{
     public static function checkLoginState($dbh)
 	{

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("posts.php");
+header("strict-transport-security: max-age=600");
 
 if (!func::checkLoginState($dbh))
 {
@@ -24,7 +25,7 @@ if (!func::checkLoginState($dbh))
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NCI Forum</title>
+  <title>Rocket Board</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +47,7 @@ if (!func::checkLoginState($dbh))
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">NCI Forum
+        <h1 class="my-4">Rocket Board
           <!-- <small>Secondary Text</small> -->
         </h1>
 

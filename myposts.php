@@ -24,7 +24,7 @@ include_once("functions.php");
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>NCI Forum</title>
+  <title>Rocket Board</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@ include_once("functions.php");
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">NCI Forum
+        <h1 class="my-4">Rocket Board
           <!-- <small>Secondary Text</small> -->
         </h1>
 
@@ -90,14 +90,7 @@ include_once("functions.php");
         </div> -->
 
         <!-- Pagination -->
-        <ul class="pagination justify-content-center mb-4">
-          <li class="page-item">
-            <a class="page-link" href="#">&larr; Older</a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">Newer &rarr;</a>
-          </li>
-        </ul>
+        
 
       </div>
       <div class="col-md-4">
