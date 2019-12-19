@@ -75,10 +75,10 @@ public static function createRecord($dbh, $username, $user_id){
 }
 
 public static function createCookie($username, $user_id, $token, $serial){
-    setcookie('username', $username, time() + (86400) *10, "/; samesite=strict", null, true, true);
-    setcookie('session_userid', $user_id, time() + (86400) *10, "/; samesite=strict", null, true, true);
-    setcookie('token', $token, time() + (86400) *10, "/; samesite=strict", null, true, true);
-    setcookie('serial', $serial, time() + (86400) *10, "/; samesite=strict; ", null, true, true);
+    setcookie('username', $username, time() + (86400) *10, "/", null, true, true, ['samesite'=>'Strict']);
+    setcookie('session_userid', $user_id, time() + (86400) *10, "/", null, true, true, ['samesite'=>'Strict']);
+    setcookie('token', $token, time() + (86400) *10, "/", null, true, true, ['samesite'=>'Strict']);
+    setcookie('serial', $serial, time() + (86400) *10, "/", null, true, true, ['samesite'=>'Strict']);
 }
 
 public static function deleteCookie(){
