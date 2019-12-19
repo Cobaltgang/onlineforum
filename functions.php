@@ -68,10 +68,16 @@ public static function createRecord($dbh, $username, $user_id){
 		$stmt->execute(array(':user_id' => $user_id,
 							 ':token' => $token,
                              ':serial' => $serial,
-                            ':date'=>$date));
+							':date'=>$date));
+							
+						
                              
 
 
+}
+
+public static function redirect(){
+	header("location:index.php");
 }
 
 public static function createCookie($username, $user_id, $token, $serial){
@@ -79,6 +85,7 @@ setcookie('username', $username, time() + (86400) *10, "/", null, true, true, /*
 setcookie('session_userid', $user_id, time() + (86400) *10, "/", null, true, true, /*['samesite'=>'Strict']*/);
 setcookie('token', $token, time() + (86400) *10, "/", null, true, true, /*['samesite'=>'Strict']*/);
 setcookie('serial', $serial, time() + (86400) *10, "/", null, true, true, /*['samesite'=>'Strict']*/);
+
 }
 
 public static function deleteCookie(){

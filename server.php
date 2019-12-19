@@ -73,7 +73,7 @@ if (isset($_POST['login_user'])) {
                     $stmt = $dbh->prepare($query);
                     $stmt->execute(array(':username' => $username,':email' => $email, ':password' =>$hash));
                     func::createRecord($dbh, $row['username'], $row['user_id']);
-                     header("location:index.php");
+                     func::redirect();
                     
                     
                 }
