@@ -16,14 +16,18 @@ if (isset($_POST['login_user'])) {
     }
     if (count($errors) == 0) {
 	
-        $query = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $query = "SELECT * FROM users WHERE username = :username ";
             $stmt = $dbh->prepare($query);
-            $stmt->execute(array(':username' => $username, ':password' =>$password));
+            $stmt->execute(array(':username' => $username));
 
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if(password_verify($password, $row['password'])) {
-                echo'verified';
+                func::createRecord($dbh, $row['username'], $row['user_id']);
+                header("location:index.php");
+            }
+            else{
+                array_push($errors, "The account name or password that you have entered is incorrect.");
             }
         
             
