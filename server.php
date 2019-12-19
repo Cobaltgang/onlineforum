@@ -14,7 +14,7 @@ if (isset($_POST['login_user'])) {
 	if (empty($password)) {
 		array_push($errors, "Password is required");
     }
-    $query = "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE :IPaddress AND `timestamp` > (now() - interval 10 minute)";
+   /* $query = "SELECT COUNT(*) FROM `ip` WHERE `address` LIKE :IPaddress AND `timestamp` > (now() - interval 10 minute)";
                 $stmt = $dbh->prepare($query);
                 $stmt->execute(array(':IPaddress' => $IPaddress));
 
@@ -37,7 +37,7 @@ if (isset($_POST['login_user'])) {
             $stmt->execute(array(':username' => $username));
 
 
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);*/
             if(password_verify($password, $row['password'])) {
                 
        
@@ -57,7 +57,7 @@ if (isset($_POST['login_user'])) {
         
             
         }
-    }
+    //}
     
 
         if (isset($_POST['reg_user'])) {
