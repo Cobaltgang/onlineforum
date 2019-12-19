@@ -29,7 +29,7 @@ if (isset($_POST['login_user'])) {
                 {
             echo "Your are allowed 3 attempts in 10 minutes";
         }
-        if ($row['address'] < 3){
+        if ($row['address'] <= 3){
         
 	
         $query = "SELECT * FROM users WHERE username = :username ";
@@ -56,7 +56,7 @@ if (isset($_POST['login_user'])) {
                 
             }
         
-            
+        }            
         
     
     
